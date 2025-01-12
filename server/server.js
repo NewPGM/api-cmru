@@ -39,6 +39,10 @@ app.use('/api/intents',intents );
 app.use('/api/admin', adminRoutes);
 app.use('/api/login', loginRoutes);
 
+app.get('/', (req, res) => {
+  res.send('เซิร์ฟเวอร์กำลังทำงาน');
+});
+
 if (!process.env.VERCEL) {
   app.listen(port, () => {
     console.log(`เซิร์ฟเวอร์กำลังทำงานที่ http://localhost:${port}`);
