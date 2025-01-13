@@ -126,7 +126,7 @@ router.put('/:id', async (req, res) => {
       SET name = ?, email = ?, room_id = ? , Url = ?, phone_number = ?
       WHERE instructor_id = ?
     `;
-    await executeQuery(query, [name, email, room_id, id, Url, phone_number], res, 'อัปเดตข้อมูลผู้สอนเรียบร้อยแล้ว');
+    await executeQuery(query, [name, email, room_id, Url, phone_number, id], res, 'อัปเดตข้อมูลผู้สอนเรียบร้อยแล้ว');
   } catch (err) {
     console.error('เกิดข้อผิดพลาดในการดำเนินการฐานข้อมูล:', err.message);
     res.status(500).send('เกิดข้อผิดพลาดในการดำเนินการฐานข้อมูล');
