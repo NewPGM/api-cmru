@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
     const [lastId] = await pool.query('SELECT MAX(instructor_id) as max_id FROM instructors');
     const nextId = (lastId[0].max_id || 0) + 1;
 
-    const query = 'INSERT INTO instructors (instructor_id, name, email, room_id, Url, phone_number) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO instructors (instructor_id, name, email, room_id, Url, phone_number) VALUES (?, ?, ?, ?, ?, ?)';
     await pool.query(query, [nextId, name, email, room_id, Url, phone_number]);
     
     res.status(201).send('เพิ่มข้อมูลผู้สอนเรียบร้อยแล้ว');
