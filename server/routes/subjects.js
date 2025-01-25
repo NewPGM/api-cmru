@@ -26,14 +26,13 @@ router.get('/', async (req, res) => {
       subject_id,
       subject_code,
       subject_name,
-      description
     FROM subjects
   `;
   await executeQuery(query, [], res);
 });
 
 router.post('/', async (req, res) => {
-  const { subject_code, subject_name, description } = req.body;
+  const { subject_code, subject_name } = req.body;
 
   if (!subject_code || !subject_name) {
     return res.status(400).send('กรุณาระบุรหัสวิชาและชื่อวิชา');
@@ -44,10 +43,10 @@ router.post('/', async (req, res) => {
     const nextId = (maxIdResult[0].max_id || 0) + 1;
 
     const query = `
-      INSERT INTO subjects (subject_id, subject_code, subject_name, description)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO subjects (subject_id, subject_code, subject_name)
+      VALUES (?, ?, ?)
     `;
-    await pool.query(query, [nextId, subject_code, subject_name, description || null]);
+    await pool.query(query, [nextId, subject_code, subject_name || null]);
     res.status(201).send('เพิ่มข้อมูลวิชาเรียบร้อยแล้ว');
   } catch (err) {
     console.error('เกิดข้อผิดพลาดในการเพิ่มข้อมูล:', err.message);
@@ -61,7 +60,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { subject_code, subject_name, description } = req.body;
+  const { subject_code, subject_name } = req.body;
 
   if (!subject_code || !subject_name) {
     return res.status(400).send('กรุณาระบุรหัสวิชาและชื่อวิชา');
@@ -78,12 +77,12 @@ router.put('/:id', async (req, res) => {
 
     const query = `
       UPDATE subjects 
-      SET subject_code = ?, subject_name = ?, description = ?
+      SET subject_code = ?, subject_name = ?
       WHERE subject_id = ?
     `;
     await executeQuery(
       query, 
-      [subject_code, subject_name, description || null, id],
+      [subject_code, subject_name || null, id],
       res,
       'อัปเดตข้อมูลวิชาเรียบร้อยแล้ว'
     );
