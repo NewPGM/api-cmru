@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
     SELECT 
       subject_id,
       subject_code,
-      subject_name,
+      subject_name
     FROM subjects
   `;
   await executeQuery(query, [], res);
