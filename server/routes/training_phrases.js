@@ -28,7 +28,7 @@ function handleDatabaseError(err, res) {
   if (err.code === 'ER_DUP_ENTRY') {
     res.status(400).send('ข้อมูลซ้ำในระบบ');
   } else {
-    res.status(500).send('เกิดข้อผิดพลาดในการดำเนินการฐานข้อมูล');
+    res.status(500).send('ไม่สามารถลบได้เนื่องจากมีการใช้งานอยู่');
   }
 }
 

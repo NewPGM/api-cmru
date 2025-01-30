@@ -16,7 +16,7 @@ async function executeQuery(query, params, res, successMessage) {
     }
   } catch (err) {
     console.error('เกิดข้อผิดพลาดในการดำเนินการฐานข้อมูล:', err.message);
-    res.status(500).send('เกิดข้อผิดพลาด');
+    res.status(500).send('ไม่สามารถลบได้เนื่องจากมีการใช้งานอยู่');
   }
 }
 
