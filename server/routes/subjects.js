@@ -96,6 +96,22 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// router.delete('/:id', async (req, res) => {
+//   const { id } = req.params;
+  
+//   try {
+//     const query = 'DELETE FROM subjects WHERE subject_id = ?';
+//     await executeQuery(query, [id], res, 'ลบข้อมูลวิชาเรียบร้อยแล้ว');
+//   } catch (err) {
+//     console.error('เกิดข้อผิดพลาดในการลบข้อมูล:', err.message);
+//     if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+//       res.status(400).send('ไม่สามารถลบได้เนื่องจากมีการใช้งานอยู่');
+//     } else {
+//       res.status(500).send('เกิดข้อผิดพลาดในการลบข้อมูล');
+//     }
+//   }
+// });
+
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   
@@ -107,7 +123,7 @@ router.delete('/:id', async (req, res) => {
     if (err.code === 'ER_ROW_IS_REFERENCED_2') {
       res.status(400).send('ไม่สามารถลบได้เนื่องจากมีการใช้งานอยู่');
     } else {
-      res.status(500).send('เกิดข้อผิดพลาดในการลบข้อมูล');
+      res.status(500).send('ไม่สามารถลบข้อมูลที่ยังใช้ในตารางอื่นได้');
     }
   }
 });
